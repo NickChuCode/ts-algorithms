@@ -1,4 +1,4 @@
-import { ArrayStack } from '../src/Stack'
+import { ArrayStack, ObjectStack } from '../src/Stack'
 
 describe('Stack', () => {
   describe('ArrayStack', () => {
@@ -21,6 +21,29 @@ describe('Stack', () => {
       stack.pop()
       stack.pop()
       expect(stack.size()).toBe(2)
+    })
+  })
+
+  describe('ObjectStack', () => {
+    const oStack = new ObjectStack<number>()
+    test('isEmpty', () => {
+      expect(oStack.isEmpty()).toBeTruthy()
+    })
+    test('push and peek should work', () => {
+      oStack.push(5)
+      oStack.push(8)
+      expect(oStack.peek()).toBe(8)
+    })
+    test('size should output the right length of the stack', () => {
+      oStack.push(11)
+      expect(oStack.size()).toBe(3)
+      expect(oStack.isEmpty()).toBeFalsy()
+    })
+    test('pop should work', () => {
+      oStack.push(15)
+      oStack.pop()
+      oStack.pop()
+      expect(oStack.size()).toBe(2)
     })
   })
 })
