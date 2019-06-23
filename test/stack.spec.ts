@@ -45,5 +45,10 @@ describe('Stack', () => {
       oStack.pop()
       expect(oStack.size()).toBe(2)
     })
+    test('toString should work', () => {
+      let emptyStack = new ObjectStack<number>()
+      expect(oStack.toString()).toBe('5, 8')
+      expect(emptyStack.toString()).toBe('')
+    })
   })
 })
