@@ -84,3 +84,44 @@ export class ObjectStack<T> implements Stack<T> {
     return res
   }
 }
+
+// 用 WeakMap 实现的 Stack，真正实现了 Stack 内部数据的私有化
+const items = new WeakMap()
+
+export class WeakMapStack<T> implements Stack<T> {
+  constructor() {
+    items.set(this, [])
+  }
+
+  push(element: T): void {
+    const s = items.get(this)
+    s.push(element)
+  }
+
+  pop(): T | undefined {
+    const s = items.get(this)
+    return s.pop()
+  }
+
+  size(): number {
+    const s = items.get(this)
+    return s.length
+  }
+
+  peek(): T | undefined {
+    const s = items.get(this)
+    return s[s.length - 1]
+  }
+
+  isEmpty(): boolean {
+    return items.get(this).length === 0
+  }
+
+  clear(): void {
+    items.set(this, [])
+  }
+
+  toString(): string {
+    return items.get(this).toString()
+  }
+}
