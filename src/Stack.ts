@@ -72,4 +72,15 @@ export class ObjectStack<T> implements Stack<T> {
     this.items = {}
     this.count = 0
   }
+
+  toString(): string {
+    if (this.isEmpty()) {
+      return ''
+    }
+    let res = `${this.items[0]}`
+    for (let i = 1; i < this.count; i++) {
+      res = `${res}, ${this.items[i]}`
+    }
+    return res
+  }
 }
