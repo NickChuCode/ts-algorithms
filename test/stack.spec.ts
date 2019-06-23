@@ -1,4 +1,4 @@
-import { ArrayStack, ObjectStack } from '../src/Stack'
+import { ArrayStack, ObjectStack, WeakMapStack } from '../src/Stack'
 
 describe('Stack', () => {
   describe('ArrayStack', () => {
@@ -48,6 +48,34 @@ describe('Stack', () => {
     test('toString should work', () => {
       let emptyStack = new ObjectStack<number>()
       expect(oStack.toString()).toBe('5, 8')
+      expect(emptyStack.toString()).toBe('')
+    })
+  })
+
+  describe('WeakMapStack', () => {
+    const wStack = new WeakMapStack<number>()
+    test('isEmpty', () => {
+      expect(wStack.isEmpty()).toBeTruthy()
+    })
+    test('push and peek should work', () => {
+      wStack.push(5)
+      wStack.push(8)
+      expect(wStack.peek()).toBe(8)
+    })
+    test('size should output the right length of the stack', () => {
+      wStack.push(11)
+      expect(wStack.size()).toBe(3)
+      expect(wStack.isEmpty()).toBeFalsy()
+    })
+    test('pop should work', () => {
+      wStack.push(15)
+      wStack.pop()
+      wStack.pop()
+      expect(wStack.size()).toBe(2)
+    })
+    test('toString should work', () => {
+      let emptyStack = new WeakMapStack<number>()
+      expect(wStack.toString()).toBe('5,8')
       expect(emptyStack.toString()).toBe('')
     })
   })
