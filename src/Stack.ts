@@ -1,4 +1,4 @@
-import { Stack } from './types'
+import { Stack, Items } from './types'
 
 export class ArrayStack<T> implements Stack<T> {
   items: Array<T>
@@ -23,10 +23,6 @@ export class ArrayStack<T> implements Stack<T> {
   clear(): void {
     this.items = []
   }
-}
-
-interface Items<T> {
-  [id: number]: T
 }
 
 export class ObjectStack<T> implements Stack<T> {

@@ -13,4 +13,9 @@ export interface Queue<T> {
   peek(): T | undefined
   isEmpty(): boolean
   size(): number
+  clear(): void
+}
+
+export interface Items<T> {
+  [id: number]: T
 }
