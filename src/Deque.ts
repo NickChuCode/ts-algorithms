@@ -1,6 +1,6 @@
 import { Deque, Items } from './types'
 
-class ObjectDeque<T> implements Deque<T> {
+export class ObjectDeque<T> implements Deque<T> {
   count: number
   lowestCount: number
   items: Items<T>
@@ -70,5 +70,16 @@ class ObjectDeque<T> implements Deque<T> {
     this.lowestCount = 0
     this.count = 0
     this.items = {}
+  }
+
+  toString(): string {
+    if (this.isEmpty()) {
+      return ''
+    }
+    let res = `${this.items[this.lowestCount]}`
+    for (let i = this.lowestCount + 1; i < this.count; i++) {
+      res = `${res}, ${this.items[i]}`
+    }
+    return res
   }
 }
