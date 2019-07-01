@@ -1,4 +1,5 @@
 import { ObjectDeque } from '../src/Deque'
+import { palindromeChecker } from '../examples/Queue/PalindromeChecker'
 
 describe('Deque', () => {
   describe('ObjectDeque', () => {
@@ -37,6 +38,15 @@ describe('Deque', () => {
       deque.addFront('John')
       expect(deque.size()).toBe(2)
       expect(deque.toString()).toBe('John, Jack')
+    })
+    test('palindrome test', () => {
+      expect(palindromeChecker('')).toBeFalsy()
+      expect(palindromeChecker('a')).toBeTruthy()
+      expect(palindromeChecker('aa')).toBeTruthy()
+      expect(palindromeChecker('kayak')).toBeTruthy()
+      expect(palindromeChecker('level')).toBeTruthy()
+      expect(palindromeChecker('Was it a car or a cat I saw')).toBeTruthy()
+      expect(palindromeChecker('Step on no pets')).toBeTruthy()
     })
   })
 })
