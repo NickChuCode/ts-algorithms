@@ -1,4 +1,5 @@
 import { ObjectQueue } from '../src/Queue'
+import { hotPotato } from '../examples/Queue/hotPotato'
 
 describe('Queue', () => {
   describe('ObjectQueue', () => {
@@ -24,6 +25,14 @@ describe('Queue', () => {
       queue.dequeue()
       expect(queue.size()).toBe(1)
       expect(queue.toString()).toBe('Frank')
+    })
+    test('hot patota', () => {
+      const names = ['John', 'Jack', 'Camila', 'Ingrid', 'Carl']
+      const res = hotPotato(names, 7)
+      res.eliminated.forEach(name => {
+        console.log(`${name}被淘汰`)
+      })
+      expect(res.winner).toBe('John')
     })
   })
 })

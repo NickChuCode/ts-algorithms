@@ -1,8 +1,13 @@
 import { ObjectQueue } from '../../src/Queue'
 
-export function hotPotato(elementsList: Array<string>, num: number): object {
+interface Winner<T> {
+  eliminated: Array<T>,
+  winner: T
+}
+
+export function hotPotato(elementsList: Array<string>, num: number): Winner<string> {
   const queue = new ObjectQueue<string>()
-  const elimiatedList = []
+  const elimiatedList: Array<string> = []
 
   for (let i = 0; i < elementsList.length; i++) {
     queue.enqueue(elementsList[i])
@@ -12,11 +17,11 @@ export function hotPotato(elementsList: Array<string>, num: number): object {
     for (let i = 0; i < num; i++) {
       queue.enqueue(queue.dequeue()!)
     }
-    elimiatedList.push(queue.dequeue())
+    elimiatedList.push(queue.dequeue()!)
   }
 
   return {
     eliminated: elimiatedList,
-    winner: queue.dequeue()
+    winner: queue.dequeue()!
   }
 }
