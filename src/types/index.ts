@@ -36,3 +36,28 @@ export interface Deque<T> {
   size(): number
   toString(): string
 }
+
+export interface EqualFunc<T> {
+  (a: T, b: T): boolean
+}
+
+export interface Node<T> {
+  element: T
+  next: Node<T> | null
+}
+
+export interface LinkedList<T> {
+  count: number
+  head: Node<T> | null
+  equalFunc: EqualFunc<T>
+
+  push(element: T): void
+  insert(element: T, position: number): boolean
+  getElementAt(index: number): Node<T> | undefined
+  remove(element: T): T | undefined
+  indexOf(element: T): number
+  removeAt(position: number): T | undefined
+  isEmpty(): boolean
+  size(): number
+  toString(): string
+}
