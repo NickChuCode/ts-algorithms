@@ -3,9 +3,9 @@ import { LinkedList, Node, EqualFunc } from './types'
 class LinkedNode<T> implements Node<T> {
   element: T
   next: LinkedNode<T> | null
-  constructor(element: T) {
+  constructor(element: T, next: LinkedNode<T> | null = null) {
     this.element = element
-    this.next = null
+    this.next = next
   }
 }
 
@@ -108,7 +108,7 @@ export class ObjectLinkedList<T> implements LinkedList<T> {
     return this.size() === 0
   }
 
-  getHead(): LinkedNode<T> {
+  getHead(): LinkedNode<T> | null {
     return this.head
   }
 
@@ -123,5 +123,21 @@ export class ObjectLinkedList<T> implements LinkedList<T> {
       current = current.next
     }
     return objString
+  }
+}
+
+export class DoublyNode<T> extends LinkedNode<T> {
+  prev: DoublyNode<T> | null
+  constructor(element: T, next: DoublyNode<T> | null = null, prev: DoublyNode<T> | null = null) {
+    super(element, next)
+    this.prev = prev
+  }
+}
+
+export class DoublyLinkedList<T> extends ObjectLinkedList<T> {
+  tail: DoublyNode<T> | null
+  constructor() {
+    super()
+    this.tail = null
   }
 }
