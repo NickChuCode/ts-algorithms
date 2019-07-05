@@ -135,9 +135,43 @@ export class DoublyNode<T> extends LinkedNode<T> {
 }
 
 export class DoublyLinkedList<T> extends ObjectLinkedList<T> {
+  head: DoublyNode<T> | null
   tail: DoublyNode<T> | null
   constructor() {
     super()
+    this.head = null
     this.tail = null
+  }
+
+  insert(element: T, position: number): boolean {
+    if (position >= 0 && position <= this.count) {
+      const node = new DoublyNode(element)
+      let current = this.head
+      if (position === 0) {
+        if (this.head == null) {
+          this.head = node
+          this.tail = node
+        } else {
+          node.next = this.head
+          current!.prev = node
+          this.head = node
+        }
+      } else if (position === this.count) {
+        current = this.tail
+        current!.next = node
+        node.prev = current
+        this.tail = node
+      } else {
+        const previous = this.getElementAt(position - 1)
+        current = previous!.next as DoublyNode<T>
+        node.next = current
+        previous!.next = node
+        current.prev = node
+        node.prev = previous as DoublyNode<T>
+      }
+      this.count++
+      return true
+    }
+    return false
   }
 }
