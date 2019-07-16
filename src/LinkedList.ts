@@ -174,4 +174,36 @@ export class DoublyLinkedList<T> extends ObjectLinkedList<T> {
     }
     return false
   }
+
+  removeAt(position: number): T | undefined {
+    // 边界条件1：position 首先必须是合法的，在索引范围内的
+    if (position >= 0 && position < this.count) {
+      let current = this.head
+      // 边界条件2：删除的是头结点
+      if (position === 0) {
+        this.head = current!.next as DoublyNode<T>
+        // 边界条件3：删除的是头结点，而且表中只有一个节点
+        if (this.count === 1) {
+          this.tail = null
+        } else {
+          this.head.prev = null
+        }
+        // 边界条件4：删除的是最后一个节点
+      } else if (position === this.count - 1) {
+        current = this.tail
+        this.tail = current!.prev
+        this.tail!.next = null
+        // 正常情况
+      } else {
+        current = this.getElementAt(position) as DoublyNode<T>
+        const previous = current.prev
+        previous!.next = current.next
+        let element = current.next as DoublyNode<T>
+        element.prev = previous
+      }
+      this.count--
+      return current!.element
+    }
+    return undefined
+  }
 }
