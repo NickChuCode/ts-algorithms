@@ -207,3 +207,35 @@ export class DoublyLinkedList<T> extends ObjectLinkedList<T> {
     return undefined
   }
 }
+
+// 循环链表没有任何新的属性和方法，只要继承，并重写需要重写的即可
+export class CircularLinkedList<T> extends ObjectLinkedList<T> {
+  constructor() {
+    super()
+  }
+
+  insert(element: T, position: number): boolean {
+    if (position >= 0 && position < this.count) {
+      const node = new DoublyNode(element)
+      let current = this.head
+      if (position === 0) {
+        if (this.head == null) {
+          this.head = node
+          node.next = this.head
+        } else {
+          node.next = current
+          current = this.getElementAt(this.size()) as LinkedNode<T>
+          this.head = node
+          current.next = this.head
+        }
+      } else {
+        const previous = this.getElementAt(position - 1)
+        node.next = previous!.next
+        previous!.next = node
+      }
+      this.count++
+      return true
+    }
+    return false
+  }
+}
