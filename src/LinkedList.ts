@@ -238,4 +238,28 @@ export class CircularLinkedList<T> extends ObjectLinkedList<T> {
     }
     return false
   }
+
+  removeAt(position: number): T | undefined {
+    if (position >= 0 && position < this.count) {
+      let current = this.head
+      if (position === 0) {
+        if (this.size() === 1) {
+          this.head = null
+        } else {
+          const removed = this.head
+          current = this.getElementAt(this.size()) as LinkedNode<T>
+          this.head = this.head!.next
+          current.next = this.head
+          current = removed
+        }
+      } else {
+        const previous = this.getElementAt(position - 1)
+        current = previous!.next
+        previous!.next = current!.next
+      }
+      this.count--
+      return current!.element
+    }
+    return undefined
+  }
 }
